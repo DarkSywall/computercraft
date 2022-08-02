@@ -177,7 +177,7 @@ function goHome()
 
     -- neutralize x axis
     if homePosition.x > 0 then
-        while homePosition.orientation ~= "right" do
+        while homePosition.orientation ~= "back" do
             rotateRight()
         end
 
@@ -186,7 +186,7 @@ function goHome()
             turtle.forward()
         end
     elseif homePosition.x < 0 then
-        while homePosition.orientation ~= "left" do
+        while homePosition.orientation ~= "front" do
             rotateRight()
         end
         while homePosition.x < 0 do
