@@ -233,7 +233,8 @@ end
 -- #####################################################
 function dropInventoryToChest()
     for i = 1, 16, 1 do
-        turtle.drop(i)
+        turtle.select(i)
+        turtle.drop()
     end
 end
 
