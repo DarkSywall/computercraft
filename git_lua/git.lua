@@ -1,9 +1,8 @@
 local gitLinks = {
-    { name = "home.lua", url = "https://raw.githubusercontent.com/DarkSywall/computercraft/master/home.lua" },
-    { name = "refill.lua", url = "https://raw.githubusercontent.com/DarkSywall/computercraft/master/refill.lua" }
+    { name = "home.lua", url = "https://raw.githubusercontent.com/DarkSywall/computercraft/master/home.lua" }
 }
 
-local folderName = "darksywall"
+local folderName = "ds"
 
 for i = 1, #gitLinks, 1 do
     rq = http.get(gitLinks[i].url)
