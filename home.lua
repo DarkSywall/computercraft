@@ -117,3 +117,11 @@ function rotateRight()
     changeOrientation("right")
     turtle.turnRight()
 end
+
+function getPosition()
+    return homePosition.x, homePosition.y, homePosition.z
+end
+
+function getOrientation()
+    return homePosition.orientation
+end
