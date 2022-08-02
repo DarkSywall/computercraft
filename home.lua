@@ -208,10 +208,17 @@ end
 -- Fuel Mods
 -- #####################################################
 function suckUpFuelMats()
-    fuelStatus = turtle.getFuelLevel()
-
     while turtle.suck() == true do
         -- just do nothing, keep sucking
+    end
+end
+
+function fillUpWithFuelMats()
+    fuelStatus = turtle.getFuelLevel()
+
+    for i = 1, 16, 1 do
+        turtle.select(i)
+        turtle.refuel()
     end
 
     if turtle.getFuelLevel() == fuelStatus then
@@ -221,16 +228,14 @@ function suckUpFuelMats()
     end
 end
 
-function fillUpWithFuelMats()
-    for i = 1, 16, 1 do
-        turtle.select(i)
-        turtle.refuel()
-    end
-end
-
 -- #####################################################
 -- Storage Fuel Modules
 -- #####################################################
+function dropInventoryToChest()
+    for i = 1, 16, 1 do
+        turtle.drop(i)
+    end
+end
 
 -- #####################################################
 -- Mining Fuel Modules
