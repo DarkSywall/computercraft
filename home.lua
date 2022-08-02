@@ -37,9 +37,9 @@ function calculateOrientation(movementDirection)
         elseif homePosition.orientation == "back" then
             homePosition.x = homePosition.x - 1
         elseif homePosition.orientation == "left" then
-            homePosition.y = homePosition.y + 1
-        elseif homePosition.orientation == "right" then
             homePosition.y = homePosition.y - 1
+        elseif homePosition.orientation == "right" then
+            homePosition.y = homePosition.y + 1
         end
     elseif movementDirection == "back" then
         if homePosition.orientation == "front" then
@@ -47,9 +47,9 @@ function calculateOrientation(movementDirection)
         elseif homePosition.orientation == "back" then
             homePosition.x = homePosition.x + 1
         elseif homePosition.orientation == "left" then
-            homePosition.y = homePosition.y - 1
-        elseif homePosition.orientation == "right" then
             homePosition.y = homePosition.y + 1
+        elseif homePosition.orientation == "right" then
+            homePosition.y = homePosition.y - 1
         end
     elseif movementDirection == "up" then
         homePosition.z = homePosition.z + 1
