@@ -1,3 +1,6 @@
+-- #####################################################
+-- Positioning Modules
+-- #####################################################
 local homePosition = {
     x = 0,
     y = 0,
@@ -200,3 +203,35 @@ function goHome()
         rotateRight()
     end
 end
+
+-- #####################################################
+-- Fuel Mods
+-- #####################################################
+function suckUpFuelMats()
+    fuelStatus = turtle.getFuelLevel()
+
+    while turtle.suck() == true do
+        -- just do nothing, keep sucking
+    end
+
+    if turtle.getFuelLevel() == fuelStatus then
+        return false
+    else
+        return true
+    end
+end
+
+function fillUpWithFuelMats()
+    for i = 1, 16, 1 do
+        turtle.select(i)
+        turtle.refuel()
+    end
+end
+
+-- #####################################################
+-- Storage Fuel Modules
+-- #####################################################
+
+-- #####################################################
+-- Mining Fuel Modules
+-- #####################################################
