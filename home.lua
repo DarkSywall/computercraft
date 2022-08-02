@@ -26,8 +26,8 @@ function changeOrientation(rotationDirection)
         elseif homePosition.orientation == "right" then
             homePosition.orientation = "back"
         end
-    end 
-    
+    end
+
 end
 
 function calculateOrientation(movementDirection)
@@ -105,7 +105,7 @@ function moveDown()
 
     calculateOrientation("down")
     turtle.down()
-    
+
 end
 
 function rotateLeft()
@@ -124,4 +124,8 @@ end
 
 function getOrientation()
     return homePosition.orientation
+end
+
+function calculateHomeGas()
+    return math.abs(homePosition.x) + math.abs(homePosition.y) + math.abs(homePosition.z)
 end
