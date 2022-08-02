@@ -194,4 +194,9 @@ function goHome()
             turtle.forward()
         end
     end
+
+    -- rotate back to start orientation
+    while homePosition.orientation ~= "front" do
+        rotateRight()
+    end
 end
