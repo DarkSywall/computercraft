@@ -129,3 +129,69 @@ end
 function calculateHomeGas()
     return math.abs(homePosition.x) + math.abs(homePosition.y) + math.abs(homePosition.z)
 end
+
+function timeToGoHome()
+    secureSteps = 10
+    stepsLeft = turtle.getFuelLevel() - calculateHomeGas() - secureSteps
+
+    if stepsLeft > 0 then
+        return false
+    else
+        return true
+    end
+end
+
+function goHome()
+    -- neutralize z axis
+    if homePosition.z > 0 then
+        while homePosition.z > 0 do
+            homePosition.z = homePosition.z - 1
+            turtle.down()
+        end
+    elseif homePosition.z < 0 then
+        while homePosition.z < 0 do
+            homePosition.z = homePosition.z + 1
+            turtle.up()
+        end
+    end
+
+    -- neutralize y axis
+    if homePosition.y > 0 then
+        while homePosition.orientation ~= "left" do
+            rotateLeft()
+        end
+
+        while homePosition.y > 0 do
+            homePosition.y = homePosition.y - 1
+            turtle.forward()
+        end
+    elseif homePosition.y < 0 then
+        while homePosition.orientation ~= "right" do
+            rotateLeft()
+        end
+        while homePosition.y < 0 do
+            homePosition.y = homePosition.y + 1
+            turtle.forward()
+        end
+    end
+
+    -- neutralize x axis
+    if homePosition.x > 0 then
+        while homePosition.orientation ~= "right" do
+            rotateRight()
+        end
+
+        while homePosition.x > 0 do
+            homePosition.x = homePosition.x - 1
+            turtle.forward()
+        end
+    elseif homePosition.x < 0 then
+        while homePosition.orientation ~= "left" do
+            rotateRight()
+        end
+        while homePosition.x < 0 do
+            homePosition.x = homePosition.x + 1
+            turtle.forward()
+        end
+    end
+end
