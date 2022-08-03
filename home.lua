@@ -1,4 +1,4 @@
--- v.0.1
+-- v.0.2
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -320,12 +320,9 @@ function saveCurrentMiningPosition()
     lastMinePosition.y = homePosition.y
     lastMinePosition.z = homePosition.z
     lastMinePosition.orientation = homePosition.orientation
-    print(homePosition)
-    print(lastMinePosition)
 end
 
 function goToLastMinigPosition()
-    print(lastMinePosition)
     goTo(lastMinePosition)
 end
 
@@ -367,18 +364,20 @@ function mineLayer()
             moveFront()
         end
 
-        if invert == true then
-            rotateLeft()
-            dig()
-            moveFront()
-            rotateLeft()
-            invert = false
-        else
-            rotateRight()
-            dig()
-            moveFront()
-            rotateRight()
-            invert = true
+        if y < mineAreaY then
+            if invert == true then
+                rotateLeft()
+                dig()
+                moveFront()
+                rotateLeft()
+                invert = false
+            else
+                rotateRight()
+                dig()
+                moveFront()
+                rotateRight()
+                invert = true
+            end
         end
 
         healthCheck()
@@ -390,6 +389,11 @@ end
 
 function startMining()
     isRunning = true
+
+    if checkBedrockUnderneath() ~= true then
+        digDown()
+        moveDown()
+    end
 
     while isRunning do
         mineLayer()
