@@ -371,11 +371,13 @@ function mineLayer()
             dig()
             moveFront()
             rotateLeft()
+            invert = false
         else
             rotateRight()
             dig()
             moveFront()
             rotateRight()
+            invert = true
         end
 
         healthCheck()
@@ -390,7 +392,7 @@ function startMining()
 
     while isRunning do
         mineLayer()
-        
+
         -- after finishing a whole layer check layer beneath
         if checkBedrockUnderneath() then
             goHome()
