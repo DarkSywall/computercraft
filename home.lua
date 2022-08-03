@@ -1,4 +1,4 @@
--- v.0.5
+-- v.0.6
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -389,11 +389,6 @@ end
 
 function startMining()
     isRunning = true
-
-    if checkBedrockUnderneath() ~= true then
-        digDown()
-        moveDown()
-    end
 
     while isRunning do
         mineLayer()
