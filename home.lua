@@ -141,7 +141,7 @@ function timeToGoHome()
 
     if stepsLeft < 0 then
         return true
-    elseif turtle.getItemSpace(16) < 64 then
+    elseif turtle.getItemSpace(16) ~= 64 then
         return true
     else
         return false
@@ -396,6 +396,10 @@ end
 
 function startMining()
     isRunning = true
+
+    while turtle.detectDown() == false do
+        moveDown()
+    end
 
     while isRunning do
         -- after finishing a whole layer check layer beneath
