@@ -294,8 +294,8 @@ end
 local startLayer = 76 -- here we need to insert the layer where the miner was placed
 local bedRockLayer = -60 -- this is the layer where we want not to dig in!
 
-local mineAreaX = 9 -- size of the mine field in x direction
-local mineAreaY = 9 -- size of the mine field in y direction
+local mineAreaX = 8 -- size of the mine field in x direction
+local mineAreaY = 8 -- size of the mine field in y direction
 
 local isRunning = false -- will be set to false as soon as the miner reaches bedrock and returns home
 
@@ -366,7 +366,7 @@ function mineLayer()
             moveFront()
         end
 
-        if invert then
+        if invert == true then
             rotateLeft()
             dig()
             moveFront()
