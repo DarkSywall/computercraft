@@ -134,13 +134,16 @@ function calculateHomeGas()
 end
 
 function timeToGoHome()
-    secureSteps = 10
+    -- check if fuel will be to low or chest full
+    secureSteps = 20
     stepsLeft = turtle.getFuelLevel() - calculateHomeGas() - secureSteps
 
-    if stepsLeft > 0 then
-        return false
-    else
+    if stepsLeft < 0 then
         return true
+    elseif turtle.getItemSpace(16) < 64 then
+        return true
+    else
+        return false
     end
 end
 
@@ -291,8 +294,8 @@ end
 local startLayer = 76 -- here we need to insert the layer where the miner was placed
 local bedRockLayer = -60 -- this is the layer where we want not to dig in!
 
-local mineAreaX = 5 -- size of the mine field in x direction
-local mineAreaY = 5 -- size of the mine field in y direction
+local mineAreaX = 9 -- size of the mine field in x direction
+local mineAreaY = 9 -- size of the mine field in y direction
 
 local isRunning = false -- will be set to false as soon as the miner reaches bedrock and returns home
 
@@ -325,7 +328,60 @@ function goToLastMinigPosition()
     goTo(lastMinePosition)
 end
 
+function dig()
+    if turtle.detect() then
+        turtle.dig()
+    end
+end
+
+function digDown()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
+end
+
+function healthCheck()
+    if timeToGoHome() then
+        saveCurrentMiningPosition()
+        goHome()
+        emptyInventory()
+        fillTurtle()
+        goToLastMinigPosition()
+    end
+end
+
 function mineLayer()
+    layerPosition = {
+        x = homePosition.x,
+        y = homePosition.y,
+        z = homePosition.z,
+        orientation = homePosition.orientation
+    }
+
+    invert = false
+
+    for y = 1, mineAreaY, 1 do
+        for x = 1, mineAreaX, 1 do
+            dig()
+            moveFront()
+        end
+
+        if invert then
+            rotateLeft()
+            dig()
+            moveFront()
+            rotateLeft()
+        else
+            rotateRight()
+            dig()
+            moveFront()
+            rotateRight()
+        end
+
+        healthCheck()
+    end
+
+    goTo(layerPosition)
 
 end
 
@@ -333,11 +389,17 @@ function startMining()
     isRunning = true
 
     while isRunning do
-
-        -- after finishing a whole stage check layer beneath
+        mineLayer()
+        
+        -- after finishing a whole layer check layer beneath
         if checkBedrockUnderneath() then
             goHome()
             isRunning = false
+        else
+            rotateLeft()
+            rotateLeft()
+            digDown()
+            moveDown()
         end
     end
 end
