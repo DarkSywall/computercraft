@@ -144,64 +144,75 @@ function timeToGoHome()
     end
 end
 
-function goHome()
-    -- neutralize z axis
-    if homePosition.z > 0 then
-        while homePosition.z > 0 do
-            homePosition.z = homePosition.z - 1
-            turtle.down()
-        end
-    elseif homePosition.z < 0 then
-        while homePosition.z < 0 do
-            homePosition.z = homePosition.z + 1
-            turtle.up()
-        end
-    end
-
-    -- neutralize y axis
-    if homePosition.y > 0 then
-        while homePosition.orientation ~= "left" do
-            rotateLeft()
-        end
-
-        while homePosition.y > 0 do
-            homePosition.y = homePosition.y - 1
-            turtle.forward()
-        end
-    elseif homePosition.y < 0 then
-        while homePosition.orientation ~= "right" do
-            rotateLeft()
-        end
-        while homePosition.y < 0 do
-            homePosition.y = homePosition.y + 1
-            turtle.forward()
-        end
-    end
-
-    -- neutralize x axis
-    if homePosition.x > 0 then
+function goTo(position)
+    -- handle x position
+    if homePosition.x > position.x then
         while homePosition.orientation ~= "back" do
             rotateRight()
         end
 
-        while homePosition.x > 0 do
+        while homePosition.x > position.x do
             homePosition.x = homePosition.x - 1
             turtle.forward()
         end
-    elseif homePosition.x < 0 then
+    elseif homePosition.x < position.x then
         while homePosition.orientation ~= "front" do
             rotateRight()
         end
-        while homePosition.x < 0 do
+        while homePosition.x < position.x do
             homePosition.x = homePosition.x + 1
             turtle.forward()
         end
     end
 
-    -- rotate back to start orientation
-    while homePosition.orientation ~= "front" do
+    -- handle y position
+    if homePosition.y > position.y then
+        while homePosition.orientation ~= "left" do
+            rotateLeft()
+        end
+
+        while homePosition.y > position.y do
+            homePosition.y = homePosition.y - 1
+            turtle.forward()
+        end
+    elseif homePosition.y < position.y then
+        while homePosition.orientation ~= "right" do
+            rotateLeft()
+        end
+        while homePosition.y < position.y do
+            homePosition.y = homePosition.y + 1
+            turtle.forward()
+        end
+    end
+
+    -- handle z position
+    if homePosition.z > position.z then
+        while homePosition.z > position.z do
+            homePosition.z = homePosition.z - 1
+            turtle.down()
+        end
+    elseif homePosition.z < position.z then
+        while homePosition.z < position.z do
+            homePosition.z = homePosition.z + 1
+            turtle.up()
+        end
+    end
+
+    -- handle orientation
+    while homePosition.orientation ~= position.orientation do
         rotateRight()
     end
+end
+
+function goHome()
+    goTo(
+        {
+            x = 0,
+            y = 0,
+            z = 0,
+            orientation = "front"
+        }
+    )
 end
 
 -- #####################################################
@@ -277,3 +288,50 @@ end
 -- #####################################################
 -- Mining Modules
 -- #####################################################
+local startLayer = 76 -- here we need to insert the layer where the miner was placed
+local bedRockLayer = -60 -- this is the layer where we want not to dig in!
+
+local mineAreaX = 5 -- size of the mine field in x direction
+local mineAreaY = 5 -- size of the mine field in y direction
+
+local isRunning = false -- will be set to false as soon as the miner reaches bedrock and returns home
+
+local lastMinePosition = {
+    x = 0,
+    y = 0,
+    z = 0,
+    orientation = "front"
+}
+
+function checkBedrockUnderneath()
+    if startLayer - homePosition.z - 1 <= bedRockLayer then
+        return true
+    else
+        return false
+    end
+end
+
+function saveCurrentMiningPosition()
+    lastMinePosition = homePosition
+end
+
+function goToLastMinigPosition()
+    goTo(lastMinePosition)
+end
+
+function mineLayer()
+
+end
+
+function startMining()
+    isRunning = true
+
+    while isRunning do
+
+        -- after finishing a whole stage check layer beneath
+        if checkBedrockUnderneath() then
+            goHome()
+            isRunning = false
+        end
+    end
+end
