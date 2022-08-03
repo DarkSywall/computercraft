@@ -1,4 +1,4 @@
--- v.0.3
+-- v.0.4
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -157,7 +157,7 @@ function goTo(position)
 
         while homePosition.x > position.x do
             homePosition.x = homePosition.x - 1
-            turtle.forward()
+            moveFront()
         end
     elseif homePosition.x < position.x then
         while homePosition.orientation ~= "front" do
@@ -165,7 +165,7 @@ function goTo(position)
         end
         while homePosition.x < position.x do
             homePosition.x = homePosition.x + 1
-            turtle.forward()
+            moveFront()
         end
     end
 
@@ -177,7 +177,7 @@ function goTo(position)
 
         while homePosition.y > position.y do
             homePosition.y = homePosition.y - 1
-            turtle.forward()
+            moveFront()
         end
     elseif homePosition.y < position.y then
         while homePosition.orientation ~= "right" do
@@ -185,7 +185,7 @@ function goTo(position)
         end
         while homePosition.y < position.y do
             homePosition.y = homePosition.y + 1
-            turtle.forward()
+            moveFront()
         end
     end
 
@@ -193,12 +193,12 @@ function goTo(position)
     if homePosition.z > position.z then
         while homePosition.z > position.z do
             homePosition.z = homePosition.z - 1
-            turtle.down()
+            moveDown()
         end
     elseif homePosition.z < position.z then
         while homePosition.z < position.z do
             homePosition.z = homePosition.z + 1
-            turtle.up()
+            moveUp()
         end
     end
 
@@ -408,3 +408,5 @@ function startMining()
         end
     end
 end
+
+startMining()
