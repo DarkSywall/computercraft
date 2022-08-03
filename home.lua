@@ -1,4 +1,4 @@
--- v.0.6
+-- v.0.7
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -156,7 +156,7 @@ function goTo(position)
         end
 
         while homePosition.x ~= position.x do
-            homePosition.x = homePosition.x - 1
+            -- homePosition.x = homePosition.x - 1
             moveFront()
         end
     elseif homePosition.x < position.x then
@@ -164,7 +164,7 @@ function goTo(position)
             rotateRight()
         end
         while homePosition.x ~= position.x do
-            homePosition.x = homePosition.x + 1
+            -- homePosition.x = homePosition.x + 1
             moveFront()
         end
     end
@@ -176,7 +176,7 @@ function goTo(position)
         end
 
         while homePosition.y ~= position.y do
-            homePosition.y = homePosition.y - 1
+            -- homePosition.y = homePosition.y - 1
             moveFront()
         end
     elseif homePosition.y < position.y then
@@ -184,7 +184,7 @@ function goTo(position)
             rotateLeft()
         end
         while homePosition.y ~= position.y do
-            homePosition.y = homePosition.y + 1
+            -- homePosition.y = homePosition.y + 1
             moveFront()
         end
     end
@@ -192,12 +192,12 @@ function goTo(position)
     -- handle z position
     if homePosition.z > position.z then
         while homePosition.z ~= position.z do
-            homePosition.z = homePosition.z - 1
+            -- homePosition.z = homePosition.z - 1
             moveDown()
         end
     elseif homePosition.z < position.z then
         while homePosition.z ~= position.z do
-            homePosition.z = homePosition.z + 1
+            -- homePosition.z = homePosition.z + 1
             moveUp()
         end
     end
