@@ -1,4 +1,4 @@
--- v.0.7
+-- v.0.8
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -155,7 +155,7 @@ function goTo(position)
             rotateRight()
         end
 
-        while homePosition.x ~= position.x do
+        while homePosition.x > position.x do
             -- homePosition.x = homePosition.x - 1
             moveFront()
         end
@@ -163,7 +163,7 @@ function goTo(position)
         while homePosition.orientation ~= "front" do
             rotateRight()
         end
-        while homePosition.x ~= position.x do
+        while homePosition.x < position.x do
             -- homePosition.x = homePosition.x + 1
             moveFront()
         end
@@ -175,7 +175,7 @@ function goTo(position)
             rotateLeft()
         end
 
-        while homePosition.y ~= position.y do
+        while homePosition.y > position.y do
             -- homePosition.y = homePosition.y - 1
             moveFront()
         end
@@ -183,7 +183,7 @@ function goTo(position)
         while homePosition.orientation ~= "right" do
             rotateLeft()
         end
-        while homePosition.y ~= position.y do
+        while homePosition.y < position.y do
             -- homePosition.y = homePosition.y + 1
             moveFront()
         end
@@ -191,12 +191,12 @@ function goTo(position)
 
     -- handle z position
     if homePosition.z > position.z then
-        while homePosition.z ~= position.z do
+        while homePosition.z > position.z do
             -- homePosition.z = homePosition.z - 1
             moveDown()
         end
     elseif homePosition.z < position.z then
-        while homePosition.z ~= position.z do
+        while homePosition.z < position.z do
             -- homePosition.z = homePosition.z + 1
             moveUp()
         end
@@ -362,6 +362,8 @@ function mineLayer()
         for x = 1, mineAreaX, 1 do
             dig()
             moveFront()
+
+            healthCheck()
         end
 
         if y < mineAreaY then
@@ -391,8 +393,6 @@ function startMining()
     isRunning = true
 
     while isRunning do
-        mineLayer()
-
         -- after finishing a whole layer check layer beneath
         if checkBedrockUnderneath() then
             goHome()
@@ -401,6 +401,8 @@ function startMining()
             digDown()
             moveDown()
         end
+
+        mineLayer()
     end
 end
 
