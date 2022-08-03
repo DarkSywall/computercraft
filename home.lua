@@ -236,6 +236,8 @@ function fillUpWithFuelMats()
         turtle.refuel()
     end
 
+    turtle.select(1)
+
     if turtle.getFuelLevel() == fuelStatus then
         return false
     else
