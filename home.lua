@@ -316,9 +316,12 @@ function saveCurrentMiningPosition()
     lastMinePosition.y = homePosition.y
     lastMinePosition.z = homePosition.z
     lastMinePosition.orientation = homePosition.orientation
+    print(homePosition)
+    print(lastMinePosition)
 end
 
 function goToLastMinigPosition()
+    print(lastMinePosition)
     goTo(lastMinePosition)
 end
 
