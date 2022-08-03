@@ -398,8 +398,6 @@ function startMining()
             goHome()
             isRunning = false
         else
-            rotateLeft()
-            rotateLeft()
             digDown()
             moveDown()
         end
