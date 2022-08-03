@@ -312,7 +312,10 @@ function checkBedrockUnderneath()
 end
 
 function saveCurrentMiningPosition()
-    lastMinePosition = homePosition
+    lastMinePosition.x = homePosition.x
+    lastMinePosition.y = homePosition.y
+    lastMinePosition.z = homePosition.z
+    lastMinePosition.orientation = homePosition.orientation
 end
 
 function goToLastMinigPosition()
