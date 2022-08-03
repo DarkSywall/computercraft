@@ -228,16 +228,52 @@ function fillUpWithFuelMats()
     end
 end
 
+function fillTurtle()
+    -- make sure we are on position 0 0 0
+    goHome()
+
+    -- move to chest
+    rotateRight()
+    rotateRight()
+    moveFront()
+    moveFront()
+
+    -- fill up turtle
+    suckUpFuelMats()
+    fillUpWithFuelMats()
+
+    -- go to start position
+    goHome()
+end
+
 -- #####################################################
 -- Storage Fuel Modules
 -- #####################################################
-function dropInventoryToChest()
+function dropItemsToChest()
     for i = 1, 16, 1 do
         turtle.select(i)
         turtle.drop()
     end
 end
 
+function emptyInventory()
+    -- make sure we are on 0 0 0
+    goHome()
+
+    -- move to chest
+    rotateLeft()
+    moveFront()
+    rotateLeft()
+    moveFront()
+    moveFront()
+
+    -- drop all items
+    dropItemsToChest()
+
+    -- go back to 0 0 0
+    goHome()
+end
+
 -- #####################################################
--- Mining Fuel Modules
+-- Mining Modules
 -- #####################################################
