@@ -1,4 +1,4 @@
--- v.0.9
+-- v.0.10
 -- #####################################################
 -- Positioning Modules
 -- #####################################################
@@ -269,6 +269,8 @@ function dropItemsToChest()
         turtle.select(i)
         turtle.drop()
     end
+
+    turtle.select(1)
 end
 
 function emptyInventory()
@@ -363,6 +365,7 @@ function mineLayer()
             dig()
             moveFront()
 
+            print(getPosition())
             healthCheck()
         end
 
